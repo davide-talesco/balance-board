@@ -7,24 +7,6 @@
   </head>
   <body>
     <div id="root">not rendered</div>
-    <div id="status">No data</div>
-
-    <script>
-      let status = document.getElementById('status');
-      if ('Accelerometer' in window) {
-        let sensor = new Accelerometer();
-        sensor.addEventListener('reading', function (e) {
-          status.innerHTML =
-            'x: ' +
-            e.target.x +
-            '<br> y: ' +
-            e.target.y +
-            '<br> z: ' +
-            e.target.z;
-        });
-        sensor.start();
-      } else status.innerHTML = 'Accelerometer not supported';
-    </script>
     <script src="./App.js"></script>
   </body>
 </html>
