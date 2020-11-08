@@ -35,18 +35,17 @@ const App = () => {
 // TODO need to change state only after XXX ms
 // TODO how do I know if I am hitting the ground outside the X and Y coordinates
 function computeBalance(sensor) {
-  // its on balance if X and Y are between range min and max
-  const range = { min: -2.3, max: 2.3 };
+  const radius = 2.2;
+  // https://www.youmath.it/formulari/formulari-di-geometria-analitica/426-distanza-tra-due-punti-nel-piano.html
+  try {
+    const distanceFromCenter = Math.sqrt(
+      (0 - sensor.x) * (0 - sensor.x) + (0 - sensor.y) * (0 - sensor.y)
+    );
 
-  const isXinRange = sensor.x > range.min && sensor.x < range.max;
-  const isYinRange = sensor.y > range.min && sensor.y < range.max;
-
-  // Z should be higher than 9.5
-  const isZInRange = sensor.z > 9.5;
-
-  const isInBalance = isXinRange && isYinRange && isZInRange;
-
-  return isInBalance;
+    return distanceFromCenter < radius;
+  } catch (err) {
+    alert(err);
+  }
 }
 
 render(<App />, document.getElementById('root'));
